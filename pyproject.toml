@@ -1,14 +1,66 @@
+[build-system]
+requires = ["setuptools>=80.1.0"]
+
 [project]
 name = "ble2ws"
-version = "0.1.0"
-description = "Add your description here"
-requires-python = ">=3.11"
+authors = [
+    { name = "Dmytro Yaroshenko" }
+]
+description = "Simple bleak remote server over WebSocket"
+readme = "README.md"
+requires-python = ">=3.9"
+keywords = ["BLE", "BLE-mesh", "bleak", "websocket", "bridge"]
+license = { file = "LICENSE" }
+classifiers = [
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Programming Language :: Python",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: Implementation :: CPython",
+]
 dependencies = [
     "bleak>=1.0.1",
     "websockets>=15.0.1",
 ]
+dynamic = ["version"]
+
+[project.urls]
+"Homepage" = "https://github.com/o-murphy/ble2ws"
+"Bug Reports" = "https://github.com/o-murphy/ble2ws/issues"
+"Source" = "https://github.com/o-murphy/ble2ws"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["ble2ws*"]
+
+[tool.setuptools.dynamic]
+version = { file = "VERSION.txt" }
+
+[project.scripts]
+"ble2ws-demo" = "ble2ws.__main__:demo"
+
+[tool.pytest]
+testpaths = ["tests"]
+
+[tool.mypy]
+packages = ["yupy"]
+
+[tool.ruff]
+extend-exclude = ["__init__.py"]
 
 [dependency-groups]
 dev = [
+    "mypy>=1.17.1",
+    "pytest>=8.4.1",
     "ruff>=0.12.7",
 ]
